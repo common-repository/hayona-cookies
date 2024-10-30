@@ -1,0 +1,450 @@
+/**
+ * Setup
+ */
+
+@mixin lt-l {
+	@media only screen and (max-width: 1000px / 16px * 1em) {
+		@content;
+	}
+}
+
+@mixin lt-m {
+	@media only screen and (max-width: 800px / 16px * 1em) {
+		@content;
+	}
+}
+
+@mixin lt-s {
+	@media only screen and (max-width: 500px / 16px * 1em) {
+		@content;
+	}
+}
+
+@mixin lt-xs {
+	@media only screen and (max-width: 380px / 16px * 1em) {
+		@content;
+	}
+}
+
+.clearfix {
+	&:after {
+		content: "";
+		display: block;
+		height: 0;
+		visibility: hidden;
+		clear: both;
+	}
+}
+
+body.hc-styling {
+
+
+	/**
+	 * General styles
+	 */
+	
+	.hc-banner,
+	.hc-settings {
+		background-color: #f5f5f5;
+		color: #333;
+		font: 14px/1.5 BlinkMacSystemFont,-apple-system,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Arial,sans-serif;
+		
+
+		&, & * {
+			box-sizing: border-box;
+		}
+
+		@include lt-s {
+			font-size: 12px;
+		}
+
+
+		// Headings
+		
+		span.hc-h2,
+		span.hc-h3 {
+			display: block;
+			margin: 0 0 10px;
+			line-height: 1.2;
+		}
+
+		span.hc-h2 {
+			margin-bottom: 30px;
+			font-size: 25px;
+			font-weight: bold;
+			color: #222;
+
+			@include lt-s {
+				font-size: 20px;
+			}
+		}
+
+		span.hc-h3 {
+			text-transform: uppercase;
+			font-size: 16px;
+
+			@include lt-s {
+				font-size: 14px;
+			}
+		}
+
+
+		// Buttons
+
+		.hc-button {
+			display: inline-block;
+			padding: 10px 15px;
+			border-radius: 3px;
+			position: relative;
+			background-color: #228B22;
+			text-decoration: none;
+			text-align: center;
+			line-height: 1.2;
+			font-weight: normal;
+			outline: none;
+			color: #fff;
+
+			border: 0;
+			box-shadow: none;
+		}
+
+		.hc-button:after {
+			content: "";
+			border-radius: 3px;
+			background-color: #fff;
+			position: absolute;
+			top: 0; right: 0; bottom: 0; left: 0;
+			opacity: 0;
+			transition: all 0.1s linear 0s;
+		}
+
+		.hc-button:hover:after {
+			opacity: 0.15;
+		}
+
+
+		.hc-button--grey {
+			background-color: #ccc;
+			color: #222;
+		}
+
+		.hc-button--grey:after {
+			background-color: #000;
+		}
+
+
+		.hc-dimmed {
+			text-decoration: none;
+			color: inherit;
+			opacity: 0.6;
+		}
+
+		.hc-dimmed:hover {
+			opacity: 1;
+		}
+
+
+		// Toolbar
+
+		.hc-toolbar {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			display: flex;
+			align-items: baseline;
+
+			a {
+				display: block;
+				transition: all 0.1s linear 0s;
+				white-space: nowrap;
+			}
+
+			li {
+				margin-right: 20px;
+				list-style: none;
+
+				&:last-child {
+					margin-right: 0;
+				}
+
+				@include lt-s {
+					margin-right: 10px;
+				}
+			}
+		}
+
+		
+		// Cookielist
+
+		table.hc-cookielist {
+			margin: 0 0 10px;
+			padding: 0;
+			width: 100%;
+			border-collapse: collapse;
+			border: 1px solid #d1d1d1;
+			border-width: 1px 0 0 1px;
+
+			td {
+				padding: 7px;
+				border: 1px solid #d1d1d1;
+				border-width: 0 1px 1px 0;
+				background-color: transparent;
+			}
+		}
+	}
+
+
+	/**
+	 * Cookie banner
+	 */
+
+	.hc-banner {
+		display: none;			/* It is set to block by JavaScript */
+		position: absolute;
+		padding: 15px 20px;
+		top: 0;
+		right: 0;
+		left: 0;
+		z-index: 100;
+
+		&.js-visible {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			@include lt-m {
+				display: block;
+			}
+		}
+
+		&__faux-padding {
+			clear: both;
+			transition: all 0.2s;
+		}
+
+		&__close {
+			display: none;
+		}
+
+		@include lt-s {
+			padding: 20px;
+		}
+
+		.hc-banner__body {
+			margin: 0;
+			padding-right: 20px;
+
+			@include lt-m {
+				margin: 0 0 20px;
+			}
+
+			@include lt-s {
+				margin: 0 0 10px;
+			}
+		}
+	}
+
+	// Cookie wall
+
+	&.hc-cookiewall .hc-banner {
+		top: 150px;
+		right: 20%;
+		left: 20%;
+		z-index: 10000100;
+
+		@include lt-l {
+			top: 100px;
+		}
+
+		@include lt-m {
+			top: 70px;
+			right: 50px;
+			left: 50px;
+		}
+
+		@include lt-s {
+			right: 0;
+			left: 0;
+		}
+
+		&__faux-padding {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: 10000000;
+			background-color: rgba(0, 0, 0, 0.8);
+		}
+
+		&__close {
+			display: block;
+			position: absolute;
+			right: 0;
+			top: -40px;
+			line-height: 20px;
+			font-weight: bold;
+			color: #fff;
+			cursor: pointer;
+
+			@include lt-s {
+				right: 20px;
+			}
+
+			&:hover {
+				opacity: 0.8;
+			}
+
+			&__icon {
+				display: inline-block;
+				margin-right: 5px;
+				width: 20px;
+				height: 20px;
+				position: relative;
+				vertical-align: middle;
+				transform: translate( 0, -1px );
+
+				&:before, &:after {
+					content: '';
+					position: absolute;
+					height: 3px;
+					width: 100%;
+					top: 50%;
+					left: 0;
+					margin-top: -1px;
+					background: #fff;
+				}
+				
+				&:before {
+					transform: rotate(45deg);
+				}
+				
+				&:after {
+					transform: rotate(-45deg);
+				}
+			}
+		}
+	}
+
+	&.hc-cookiewall {
+		position: relative;
+	}
+
+
+	/**
+	 * Privacy settings form
+	 */
+
+	.hc-settings {
+		display: none;			// It is set to block by JavaScript 
+
+		clear: both;
+		margin: 0 0 40px;
+		padding: 20px;
+		border-radius: 3px;
+
+		@include lt-s {
+			padding: 10px;
+		}
+
+		&__header {
+			margin: 0 0 20px;
+			text-align: center;
+
+			span.hc-h2 {
+				margin: 0 0 5px;
+			}
+
+			p {
+				margin: 0 0 20px;
+
+				@include lt-xs {
+					margin: 0;
+				}
+			}
+		}
+
+		&__options {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+
+			@extend .clearfix;
+
+			& > li {
+				float: left;
+				width: 50%;
+				padding-left: 10px;
+				list-style: none;
+
+				&:first-child {
+					padding-right: 10px;
+					padding-left: 0;
+				}
+
+				@include lt-l {
+					float: none;
+					width: auto;
+					margin: 0 0 10px;
+					padding: 0 !important;
+				}
+			}
+		}
+
+		&__option {
+			padding: 20px;
+			// border: 1px solid #ccc;
+			border-radius: 3px;
+			background-color: #fff;
+
+			.hc-button {
+				display: block;
+			}
+
+			p {
+				margin: 0 0 10px;
+				height: 40px;
+				line-height: 20px;
+				color: #999;
+			}
+
+			.hc-status {
+				display: block;
+				padding: 10px 15px;
+				text-align: center;
+				line-height: 1.2;
+			}
+		}
+	}
+}
+
+
+/**
+ * Color schemes
+ */
+
+// Dark color scheme
+
+body.hc-styling--dark {
+ 	
+ 	.hc-banner,
+ 	.hc-settings {
+ 		background-color: #222;
+ 		color: #bbb;
+
+ 		span.hc-h2 {
+ 			color: #eee;
+ 		}
+ 	}
+
+ 	table.hc-cookielist {
+		
+		&, tr, td {
+			border-color: #444;
+		}
+ 	}
+
+ 	.hc-settings__option {
+ 		background-color: #333;
+ 	}
+}
